@@ -2,16 +2,23 @@ import mysql.connector as m1
 import time
 import os,sys
 
+######
+######
+PASSWORD = 'toor' # Enter the correct MySQL Password
+######
+######
+
 def Display():
     '''
     Display data
         ARGUMENT : NONE
         RETURNS  : NONE
     '''
+    global PASSWORD
     try:
         wire=m1.connect(host="localhost",
 			user="root",
-			password="toor",
+			password=PASSWORD,
 			database="BOOKSTORE")
         if wire.is_connected():
             driver = wire.cursor()
@@ -93,10 +100,11 @@ def view_all_stock():
         ARGUMENT : NONE
 	RETURNS  : NONE
     '''
+    global PASSWORD
     try:
         wire=m1.connect(host="localhost",
 			user="root",
-			password="toor",
+			password=PASSWORD,
 			database="BOOKSTORE")
         if wire.is_connected():
             driver = wire.cursor()
@@ -127,9 +135,10 @@ def add_stock():
         ARGUMENT : NONE
         RETURNS  : NONE
     '''
+    global PASSWORD
     wire=m1.connect(host="localhost",
 		    user="root",
-		    password="toor",
+		    password=PASSWORD,
                     database="BOOKSTORE")
     try:
         if wire.is_connected():
@@ -161,9 +170,10 @@ def update_stock():
         ARGUMENT : NONE
         RETURNS  : NONE
     '''
+    global PASSWORD
     wire=m1.connect(host="localhost",
                     user="root",
-                    password="toor",
+                    password=PASSWORD,
                     database="BOOKSTORE")
     try:
         if wire.is_connected():
@@ -200,9 +210,10 @@ def sell_book():
         ARGUMENT : NONE
         RETURNS  : NONE
     '''
+    global PASSWORD
     wire=m1.connect(host="localhost",
                     user="root",
-                    password="toor",
+                    password=PASSWORD,
                     database="BOOKSTORE")
     try:
         if wire.is_connected():
@@ -239,9 +250,10 @@ def view_sales():
         ARGUMENT : NONE
         RETURNS  : NONE
     '''
+    global PASSWORD
     wire=m1.connect(host="localhost",
                     user="root",
-                    password="toor",
+                    password=PASSWORD,
                     database="BOOKSTORE")
     try:
         if wire.is_connected():
@@ -275,9 +287,10 @@ def login():
         ARGUMENT : NONE
         RETURNS  : BOOLEAN {True if data exist and vice verse}
     '''
+    global PASSWORD
     wire=m1.connect(host = 'localhost' ,
     				user = 'root' ,
-    				passwd = 'toor' , 
+    				passwd = PASSWORD , 
     				database = 'BOOKSTORE')
     driver = wire.cursor()
     user = input("Enter the username : ")
@@ -296,9 +309,10 @@ def Add_user():
 	ARGUMENT : NONE
 	RETURNS  : NONE
     '''
+    global PASSWORD
     wire=m1.connect(host = 'localhost' ,
 	 	    user = 'root' ,
-	 	    passwd = 'toor' ,
+	 	    passwd = PASSWORD ,
 	   	    database = 'BOOKSTORE')
     try:
         if wire.is_connected():
@@ -333,12 +347,13 @@ def Remove_user():
     ARGUMENT : NONE
     RETURNs  : NONE
     '''
+    global PASSWORD
     print("!!! FOLLOWING ACTION MAY DELETE SOME DATA IN DATABASE 'BOOKSTORE' !!!")
     ans = input("Do you really want procced (y/n): ")
     if ans in 'yY':
         print("mySQL Username : root")
         pswd = input("mySQL Password : ")
-        if pswd == 'toor':
+        if pswd == PASSWORD:
             try:
                 username = input("\n\tEnter Username of user to be Deleted: ")
                 wire=m1.connect(host="localhost",
@@ -379,7 +394,8 @@ def Add_database():
 	ARGUMENT: NONE
 	RETURNS : NONE
     '''
-    wire = m1.connect(host="localhost",user="root",password="toor")
+    global PASSWORD
+    wire = m1.connect(host="localhost",user="root",password=PASSWORD)
     try:
         if wire.is_connected():
             wire.autocommit = True
@@ -436,12 +452,13 @@ def Delete_Database():
 	ARGUMENT : NONE
 	RETURNS  : NONE
     '''
+    global PASSWORD
     print("!!! FOLLOWING ACTION MAY DELETE THE DATEBASE 'BOOKSTORE' !!!")
     ans = input("Do you really want delete database (y/n): ")
     if ans in 'yY':
         print("mySQL Username : root")
         pswd = input("mySQL Password : ")
-        if pswd == 'toor':
+        if pswd == PASSWORD:
             try:
                 wire=m1.connect(host="localhost",user="root",password=pswd)
                 if wire.is_connected():
@@ -452,6 +469,7 @@ def Delete_Database():
                     driver.close()
                     wire.close()
                     time.sleep(3)
+                    SETTING_OPTIONS()
                 else:
                     print("\n\t!!!!! Connection error !!!!!")
 
@@ -477,6 +495,7 @@ def Delete_Database():
 
 
 def main():
+    global PASSWORD
     os.system('cls')
     print('''
 \t██████╗░░█████╗░░█████╗░██╗░░██╗  ░██████╗████████╗░█████╗░██████╗░███████╗
@@ -528,17 +547,3 @@ def main():
         sys.exit()
 
 main()
-'''
-wire=m1.connect(host="localhost",
-		user="root",
-		password="toor",
-		database="BOOKSTORE")
-try:
-    if wire.is_connected():
-
-    else:
-        print("\n\t!!!!! Connection error !!!!!")
-except Exception as e:
-    print("\n\t!!!!! Erorr found !!!!!")
-    print("\t",e)
-'''
